@@ -18,31 +18,37 @@ Class Attr extends Admin_Controller{
 		$this->view('attr',$this->data);
 	}
 	// 添加
-	public function edit ($tid){
+	public function edit ($tid,$aid=NULL){
 		if($this->input->post()){
 			$rules =$this->Attr_model->rules;
 			$this->form_validation->set_rules($rules);
 			if ($this->form_validation->run() == TRUE) {
-				//$aid为null时候 insert 否则 update
-				
-
+				// 属性插入attr表
+				$aid || $aid=NULL;
 				$arr=array('attr_name','show_type','tid');
 				$data=$this->Attr_model->array_from_post($arr);
-				p($data);
-				$this->Attr_model->save($data,$tid);
+				$aid=$this->Attr_model->save($data,$aid);
 
+				// 属性值插入attr_value表
+				$av_id=NULL;
+				$attr_value=$this->input->post('attr_value');
+				foreach ($attr_value as $v) {
+					$_data['aid']=$aid;
+					$_data['attr_value']=$v;
+					$this->Attr_value_model->save($_data,$av_id);
+				}
 				success('操作成功','admin/goods_type');	
 			}else{
 				echo (validation_errors()); 
 			}
 		}else{
-			// $aid=$this->input->get('aid')?$this->input->get('aid'):NULL;
-			// if ($aid) {
-			// 	$this->data['attr'] = $this->Goods_type_model->get($tid);
-			// }
-			// else {
-			// 	$this->data['attr'] = $this->Goods_type_model->get_new();
-			// }
+			if ($aid) {
+				$this->data['attr'] = $this->Attr_model->get($aid);
+			}
+			else {
+				$this->data['attr'] = $this->Attr_model->get_new();
+			}
+			p($this->data['attr']);
 			$this->data['tid']=$tid;
 			$this->view('attr_edit.php',$this->data);
 		}

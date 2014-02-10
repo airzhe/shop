@@ -39,7 +39,7 @@
 							<td><?php echo $v['aid'] ?></td>
 							<td><?php echo $v['attr_name'] ?></td>
 							<td>
-								<a href="<?php echo site_url('admin/attr/edit').'/'.$tid.'/?aid='.$v['aid'] ?>">编辑</a>
+								<a href="<?php echo site_url('admin/attr/edit').'/'.$tid.'/'.$v['aid'] ?>">编辑</a>
 								<a href="#">删除</a>
 							</td>
 						</tr>
