@@ -25,9 +25,9 @@
 	</div>
 	<ul class="nav nav-list">
 		<li class="active">
-			<a href="<?php echo base_url('admin/category')?>">
+			<a href="<?php echo base_url('admin/type')?>">
 				<i class="fa fa-dashboard"></i>
-				<span class="menu-text"> 分类管理 </span>
+				<span class="menu-text"> 类型管理 </span>
 			</a>
 		</li>
 		<li>
