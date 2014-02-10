@@ -26,11 +26,11 @@
 		</div> -->
 		<ul class="nav nav-tabs">
 			<li>
-				<a href="<?php echo base_url('admin/type')?>">商品类型</a>
+				<a href="<?php echo base_url('admin/goods_type')?>">商品类型</a>
 			</li>
 			<li class="active"><a href="#">添加类型</a></li>
 		</ul>
-		<form action="<?php echo base_url('admin/article/add')?>" method="post">
+		<form action="#" method="post">
 			<table class="table">
 				<thead>
 					<tr>
@@ -41,7 +41,7 @@
 					<tr>
 						<td>商品类型名称</td>
 						<td>
-							<input type="text" name='gtname' class="form-control" required/>
+							<input type="text" name='gtname' value="<?php echo $goods_type['gtname'] ?>" class="form-control" required/>
 						</td>
 					</tr>
 				</tbody>

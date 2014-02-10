@@ -46,6 +46,7 @@ class MY_Model extends CI_Model {
 		if ($this->_order_by) {
 			$this->db->order_by($this->_order_by);
 		}
+		// echo 'dddddd';
 		return $this->db->get($this->_table_name)->$method();
 	}
 	
@@ -55,44 +56,34 @@ class MY_Model extends CI_Model {
 	}
 	
 
-	/**
-	 * insert
-	 */
-
-	public function add($data){
+	public function save($data, $id = NULL){
 		
 		// Set timestamps
 		if ($this->_timestamps == TRUE) {
 			$now = date('Y-m-d H:i:s');
-			$data['created'] = $now;
-		}
-		
-		// !isset($data[$this->_primary_key]) || $data[$this->_primary_key] = NULL;
-		$this->db->set($data);
-		$this->db->insert($this->_table_name);
-		$id = $this->db->insert_id();
-		return $id;
-	}
-
-	/**
-	 * Update
-	 */
-	public function save($data, $id){
-		
-		// Set timestamps
-		if ($this->_timestamps == TRUE) {
-			$now = date('Y-m-d H:i:s');
+			$id || $data['created'] = $now;
 			$data['modified'] = $now;
 		}
 		
-		$filter = $this->_primary_filter;
-		$id = $filter($id);
-		$this->db->set($data);
-		$this->db->where($this->_primary_key, $id);
-		$this->db->update($this->_table_name);
+		// Insert
+		if ($id === NULL) {
+			!isset($data[$this->_primary_key]) || $data[$this->_primary_key] = NULL;
+			$this->db->set($data);
+			$this->db->insert($this->_table_name);
+			$id = $this->db->insert_id();
+		}
+		// Update
+		else {
+			$filter = $this->_primary_filter;
+			$id = $filter($id);
+			$this->db->set($data);
+			$this->db->where($this->_primary_key, $id);
+			$this->db->update($this->_table_name);
+		}
 		
 		return $id;
 	}
+	
 
 	/**
 	 * delete
@@ -108,6 +99,7 @@ class MY_Model extends CI_Model {
 		$this->db->limit(1);
 		$this->db->delete($this->_table_name);
 	}
+	
 	/**
 	 * 值加1
 	 */

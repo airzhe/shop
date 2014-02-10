@@ -25,7 +25,7 @@
 	</div>
 	<ul class="nav nav-list">
 		<li class="active">
-			<a href="<?php echo base_url('admin/type')?>">
+			<a href="<?php echo base_url('admin/goods_type')?>">
 				<i class="fa fa-dashboard"></i>
 				<span class="menu-text"> 类型管理 </span>
 			</a>

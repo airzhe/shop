@@ -233,7 +233,7 @@
 
 				<li class="light-blue">
 					<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-						<img class="nav-user-photo" src="http://www.gravatar.com/avatar/1e1dcac587796b81149fc3869b7ad4e5.jpg?s=36" alt="Jason's Photo">
+						<!-- <img class="nav-user-photo" src="http://www.gravatar.com/avatar/1e1dcac587796b81149fc3869b7ad4e5.jpg?s=36" alt="Jason's Photo"> -->
 						<span class="user-info">
 							<small>Welcome,</small>
 							Jason

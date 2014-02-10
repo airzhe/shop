@@ -84,6 +84,7 @@ class Front_Controller extends Base_Controller
 class Admin_Controller extends Base_Controller{
 	function __construct(){
 		parent::__construct();
+		$this->output->enable_profiler(TRUE);
 	}
 	function view($view, $vars = array(), $string=false)
 	{

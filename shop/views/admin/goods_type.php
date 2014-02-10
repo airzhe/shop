@@ -23,7 +23,7 @@
 				<li class="active">
 					<a href="#">商品类型</a>
 				</li>
-				<li><a href="<?php echo site_url('admin/type/add') ?>">添加类型</a></li>
+				<li><a href="<?php echo site_url('admin/goods_type/edit') ?>"><i class="fa fa-plus-circle"></i> 添加类型</a></li>
 			</ul>
 			<table class="table">
 				<thead>
@@ -34,19 +34,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>服装</td>
-						<td>
-							<a href="#">编辑</a>
-							<a href="#">属性</a>
-							<a href="#">删除</a>
-							<a href="#">规格</a>
-						</td>
-					</tr>
+					<?php foreach ($goods_type_list as $v): ?>
+						<tr>
+							<td><?php echo $v['tid'] ?></td>
+							<td><?php echo $v['gtname'] ?></td>
+							<td>
+								<a href="<?php echo site_url('admin/goods_type/edit').'/'.$v['tid'] ?>">编辑</a>
+								<a href="<?php echo site_url('admin/goods_type/edit').'/'.$v['tid'] ?>">属性</a>
+								<a href="#">删除</a>
+								<a href="#">规格</a>
+							</td>
+						</tr>
+					<?php endforeach ?>
 				</tbody>	
 			</table>
-			<p><button class="btn btn-primary">确定</button></p>
 		</form>
 	</div>
 </div>
