@@ -1,6 +1,5 @@
 <style>
 	tbody tr > td:first-child{width: 100px;vertical-align: middle;}
-	tbody td > [type="text"]{width: 300px;}
 </style>
 <div class="main-content">
 	<!-- 面包屑导航 -->
@@ -30,7 +29,7 @@
 			</li>
 			<li class="active"><a href="#">添加类型</a></li>
 		</ul>
-		<form action="#" method="post">
+		<form action="#" method="post" class="form-inline">
 			<table class="table">
 				<thead>
 					<tr>
@@ -41,12 +40,14 @@
 					<tr>
 						<td>商品类型名称</td>
 						<td>
-							<input type="text" name='gtname' value="<?php echo $goods_type['gtname'] ?>" class="form-control" required/>
+							<div class="form-group">
+								<input type="text" name='gtname' value="<?php echo $goods_type['gtname'] ?>" class="form-control" required/>
+							</div>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-		<input type="submit" class="btn btn-primary" value="确定"/>
-	</form>
-</div>
+			<input type="submit" class="btn btn-primary" value="确定"/>
+		</form>
+	</div>
 </div>
