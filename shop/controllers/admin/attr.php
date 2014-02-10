@@ -43,12 +43,16 @@ Class Attr extends Admin_Controller{
 			}
 		}else{
 			if ($aid) {
-				$this->data['attr'] = $this->Attr_model->get($aid);
+				$attr = $this->Attr_model->get($aid);
+				$attr_value=$this->Attr_value_model->get_by(array('aid'=>$aid));
+				// p($attr_value);
+				$attr['value']=$attr_value;
+				$this->data['attr']=$attr;
 			}
 			else {
 				$this->data['attr'] = $this->Attr_model->get_new();
 			}
-			p($this->data['attr']);
+			// p($this->data['attr']);
 			$this->data['tid']=$tid;
 			$this->view('attr_edit.php',$this->data);
 		}

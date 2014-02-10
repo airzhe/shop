@@ -17,7 +17,7 @@
 			}else{
 				$('#select').show().find("[name^=attr_value]").removeAttr('disabled');
 			}
-		}).trigger('change');
+		}).val(<?php echo $attr['show_type'] ?>).trigger('change');
 		// 添加节点
 		$('#add_node').on('click',function(){
 			var node='<p><input type="text" name="attr_value[]" class="form-control" required/>\
@@ -69,8 +69,9 @@
 					<tr>
 						<td>属性名称</td>
 						<td>
+							<!-- 隐藏域名 tid -->
 							<input type="hidden" name='tid' value="<?php echo $tid ?>" />
-							<input type="text" name='attr_name' value="" class="form-control" required/>
+							<input type="text" name='attr_name' value="<?php echo $attr['attr_name'] ?>" class="form-control" required/>
 						</td>
 					</tr>
 					<tr>
@@ -93,10 +94,12 @@
 					<tr id="select">
 						<td>属性值</td>
 						<td>
-							<p>
-								<input type="text" name='attr_value[]' class="form-control" />
-								<a href="javascript:void(0)" class="btn btn-default" id="add_node">添加</a>
-							</p>
+							<?php foreach ($attr['value'] as $v): ?>
+								<p>
+									<input type="text" name='attr_value[]' value="<?php echo $v['attr_value'] ?>" class="form-control" />
+									<a href="javascript:void(0)" class="btn btn-default" id="add_node">添加</a>
+								</p>
+							<?php endforeach ?>
 						</td>
 					</tr>
 				</tbody>
