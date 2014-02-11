@@ -1,0 +1,8 @@
+
+table.edit tbody tr > td:first-child{width: 100px;vertical-align: middle;}
+table.edit tbody td  [type="text"]{width: 300px;}
+table.edit tbody td  [name="show_type"] {width: 300px;}
+table.edit tbody tr  input{float:left;}
+table.edit tbody td  [type="text"] + .btn{margin-left: 20px;}
+
+table.list tr>td:last-child{width:200px;}

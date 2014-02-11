@@ -1,24 +1,3 @@
-<style>
-	tbody tr > td:first-child{width: 100px;vertical-align: middle;}
-	tbody td  [type="text"]{width: 300px;}
-	tbody td  [name="show_type"] {width: 300px;}
-	tbody tr  input{float:left;}
-	tbody td  [type="text"] + .btn{margin-left: 20px;}
-</style>
-<script>
-	$(document).ready(function(){
-		// 添加节点
-		$('#add_node').on('click',function(){
-			var node='<p><input type="text" name="attr_value[]" class="form-control" required/>\
-			<a href="javascript:void(0)" class="btn btn-default remove_node">移除</a></p>';
-			$(node).appendTo($(this).parents('td'));
-		})
-		// 移除节点
-		$('#select').on('click','.remove_node',function(){
-			$(this).parent().remove();
-		})
-	})
-</script>
 <div class="main-content">
 	<!-- 面包屑导航 -->
 	<div class="breadcrumbs">
@@ -48,7 +27,7 @@
 			<li class="active"><a href="#">添加规格</a></li>
 		</ul>
 		<form action="#" method="post">
-			<table class="table">
+			<table class="table edit">
 				<thead>
 					<tr>
 						<th colspan="2">规格分类</th>
@@ -83,3 +62,17 @@
 		</form>
 	</div>
 </div>
+<script>
+	$(document).ready(function(){
+		// 添加节点
+		$('#add_node').on('click',function(){
+			var node='<p><input type="text" name="attr_value[]" class="form-control" required/>\
+			<a href="javascript:void(0)" class="btn btn-default remove_node">移除</a></p>';
+			$(node).appendTo($(this).parents('td'));
+		})
+		// 移除节点
+		$('#select').on('click','.remove_node',function(){
+			$(this).parent().remove();
+		})
+	})
+</script>

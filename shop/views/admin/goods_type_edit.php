@@ -1,6 +1,3 @@
-<style>
-	tbody tr > td:first-child{width: 100px;vertical-align: middle;}
-</style>
 <div class="main-content">
 	<!-- 面包屑导航 -->
 	<div class="breadcrumbs">
@@ -30,7 +27,7 @@
 			<li class="active"><a href="#">添加类型</a></li>
 		</ul>
 		<form action="#" method="post" class="form-inline">
-			<table class="table">
+			<table class="table edit">
 				<thead>
 					<tr>
 						<th colspan="2">添加商品类型</th>

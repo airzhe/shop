@@ -7,6 +7,7 @@
 	<link href="<?php echo site_url('assets/css/font-awesome.css'); ?>" rel="stylesheet">
 	<link href="<?php echo site_url('assets/css/animate.min.css'); ?>" rel="stylesheet">
 	<link href="<?php echo site_url('assets/css/admin.css'); ?>" rel="stylesheet">
+	<link href="<?php echo site_url('assets/css/admin_style.css'); ?>" rel="stylesheet">
 	<script src="<?php echo site_url('assets/js/jquery-1.10.2.min.js'); ?>"></script>
 	<script src="<?php echo site_url('assets/js/bootstrap.js'); ?>"></script>
 	<script src="<?php echo site_url('assets/js/admin.js'); ?>"></script>

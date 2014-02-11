@@ -1,19 +1,16 @@
-	<style>
-		tr>td:last-child{width:200px;}
-	</style>
-	<div class="main-content">
-		<!-- 面包屑导航 -->
-		<div class="breadcrumbs">
-			<ul class="breadcrumb">
-				<li>
-					<i class="fa fa-home"></i>
-					<a href="#">Home</a>
-				</li>
-				<li class="active">商品类型</li>
-			</ul>
-		</div>
-		<div class="page-content">
-			<!-- page-header -->
+<div class="main-content">
+	<!-- 面包屑导航 -->
+	<div class="breadcrumbs">
+		<ul class="breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<a href="#">Home</a>
+			</li>
+			<li class="active">商品类型</li>
+		</ul>
+	</div>
+	<div class="page-content">
+		<!-- page-header -->
 			<!-- <div class="page-header position-relative">
 				<h1>
 					商品类型
@@ -25,7 +22,7 @@
 				</li>
 				<li><a href="<?php echo site_url('admin/goods_type/edit') ?>"><i class="fa fa-plus-circle"></i> 添加类型</a></li>
 			</ul>
-			<table class="table">
+			<table class="table list">
 				<thead>
 					<tr>
 						<th>tid</th>

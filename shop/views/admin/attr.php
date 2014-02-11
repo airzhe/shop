@@ -1,19 +1,16 @@
-	<style>
-		tr>td:last-child{width:200px;}
-	</style>
-	<div class="main-content">
-		<!-- 面包屑导航 -->
-		<div class="breadcrumbs">
-			<ul class="breadcrumb">
-				<li>
-					<i class="fa fa-home"></i>
-					<a href="#">Home</a>
-				</li>
-				<li class="active"><?php echo $tab_title ?>分类</li>
-			</ul>
-		</div>
-		<div class="page-content">
-			<!-- page-header -->
+<div class="main-content">
+	<!-- 面包屑导航 -->
+	<div class="breadcrumbs">
+		<ul class="breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<a href="#">Home</a>
+			</li>
+			<li class="active"><?php echo $tab_title ?>分类</li>
+		</ul>
+	</div>
+	<div class="page-content">
+		<!-- page-header -->
 			<!-- <div class="page-header position-relative">
 				<h1>
 					商品类型
@@ -25,7 +22,7 @@
 				</li>
 				<li><a href="<?php if($tab_title=='属性'){echo site_url('admin/attr/edit').'/'.$tid; }else{echo site_url('admin/spec/edit').'/'.$tid; }?>"><i class="fa fa-plus-circle"></i> 添加<?php echo $tab_title ?></a></li>
 			</ul>
-			<table class="table">
+			<table class="table list">
 				<thead>
 					<tr>
 						<th>aid</th>
