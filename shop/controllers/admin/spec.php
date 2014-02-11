@@ -1,8 +1,8 @@
 <?php 
 /**
- * 商品属性控制器
+ * 商品规格控制器
  */
-Class Attr extends Admin_Controller{
+Class Spec extends Admin_Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('Goods_type_model');
@@ -11,20 +11,7 @@ Class Attr extends Admin_Controller{
 	}
 	// 列表展示
 	public function index ($tid= NULL,$spec= NULL){
-		$tid || die;
-		$arr=array('tid'=>$tid);
-		if($spec=='s'){
-			$arr+=array('is_spec'=>1);
-			$this->data['tab_title']='规格';
-		}else{
-			$arr+=array('is_spec'=>0);
-			$this->data['tab_title']='属性';
-		}
-		$attr_list=$this->Attr_model->get_by($arr);
-		$this->data['tid']=$tid;
-		$this->data['attr_list']=$attr_list;
-
-		$this->view('attr',$this->data);
+		
 	}
 	// 添加
 	public function edit ($tid,$aid=NULL){
@@ -34,7 +21,7 @@ Class Attr extends Admin_Controller{
 			if ($this->form_validation->run() == TRUE) {
 				// 属性插入attr表
 				$aid || $aid=NULL;
-				$arr=array('attr_name','show_type','tid');
+				$arr=array('attr_name','is_spec','show_type','tid');
 				$data=$this->Attr_model->array_from_post($arr);
 				$aid=$this->Attr_model->save($data,$aid);
 
@@ -63,7 +50,7 @@ Class Attr extends Admin_Controller{
 			}
 			// p($this->data['attr']);
 			$this->data['tid']=$tid;
-			$this->view('attr_edit.php',$this->data);
+			$this->view('spec_edit.php',$this->data);
 		}
 	}
 }

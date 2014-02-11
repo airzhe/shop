@@ -21,6 +21,6 @@ class Attr_model extends MY_Model {
 		parent::__construct();
 	}
 	public function get_new(){
-		return array('attr_name'=>'','show_type'=>'1','value'=>'');
+		return array('attr_name'=>'','show_type'=>'1','value'=>array(array('attr_value'=>'')));
 	}
 }

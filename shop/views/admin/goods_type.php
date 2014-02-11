@@ -42,7 +42,7 @@
 								<a href="<?php echo site_url('admin/goods_type/edit').'/'.$v['tid'] ?>">编辑</a>
 								<a href="<?php echo site_url('admin/attr/index').'/'.$v['tid'] ?>">属性</a>
 								<a href="#">删除</a>
-								<a href="#">规格</a>
+								<a href="<?php echo site_url('admin/attr/index').'/'.$v['tid'].'/s' ?>">规格</a>
 							</td>
 						</tr>
 					<?php endforeach ?>

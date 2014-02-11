@@ -2,22 +2,11 @@
 	tbody tr > td:first-child{width: 100px;vertical-align: middle;}
 	tbody td  [type="text"]{width: 300px;}
 	tbody td  [name="show_type"] {width: 300px;}
-	tbody tr#select input{float:left;}
+	tbody tr  input{float:left;}
 	tbody td  [type="text"] + .btn{margin-left: 20px;}
 </style>
 <script>
 	$(document).ready(function(){
-		// 选择相应的属性值编辑方式
-		$("[name='show_type']").on('change',function(){
-			// 默认隐藏、不可用
-			$('#input,#select').hide();
-			$("[name^=attr_value]").attr('disabled','disabled');
-			if($(this).val()==1){
-				$('#input').show().find("[name^=attr_value]").removeAttr('disabled');
-			}else{
-				$('#select').show().find("[name^=attr_value]").removeAttr('disabled');
-			}
-		}).val(<?php echo $attr['show_type'] ?>).trigger('change');
 		// 添加节点
 		$('#add_node').on('click',function(){
 			var node='<p><input type="text" name="attr_value[]" class="form-control" required/>\
@@ -38,7 +27,7 @@
 				<i class="fa fa-home"></i>
 				<a href="#">Home</a>
 			</li>
-			<li class="active">属性分类</li>
+			<li class="active">规格分类</li>
 		</ul>
 	</div>
 	<div class="page-content">
@@ -56,42 +45,28 @@
 			<li>
 				<a href="<?php echo base_url('admin/attr/index').'/'.$tid ?>">属性列表</a>
 			</li>
-			<li class="active"><a href="#">添加属性</a></li>
+			<li class="active"><a href="#">添加规格</a></li>
 		</ul>
 		<form action="#" method="post">
 			<table class="table">
 				<thead>
 					<tr>
-						<th colspan="2">属性分类</th>
+						<th colspan="2">规格分类</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>属性名称</td>
+						<td>规格名称</td>
 						<td>
 							<!-- 隐藏域名 tid -->
 							<input type="hidden" name='tid' value="<?php echo $tid ?>" />
+							<input type="hidden" name='is_spec' value='1'/>
+							<input type="hidden" name='show_type' value='3'/>
 							<input type="text" name='attr_name' value="<?php echo $attr['attr_name'] ?>" class="form-control" required/>
 						</td>
 					</tr>
+					
 					<tr>
-						<td>显示方式</td>
-						<td>
-							<select name="show_type" class="form-control" required >
-								<option value="1">文本框</option>
-								<option value="2">单选框</option>
-								<option value="3">复选框</option>
-								<option value="4">下拉列表框</option>
-							</select>
-						</td>
-					</tr>
-					<tr id="input">
-						<td>属性值</td>
-						<td >
-							<input type="text" name='attr_value[]' value="<?php echo $attr['value']['0']['attr_value'] ?>" class="form-control" />
-						</td>
-					</tr>
-					<tr id="select">
 						<td>属性值</td>
 						<td>
 							<?php foreach ($attr['value'] as $v): ?>
