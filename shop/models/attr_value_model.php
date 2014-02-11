@@ -9,5 +9,7 @@ class Attr_value_model extends MY_Model {
 	function __construct() {
 		parent::__construct();
 	}
-	
+	public function get_new(){
+		return array(array('attr_value'=>''));
+	}
 }

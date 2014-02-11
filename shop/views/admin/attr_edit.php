@@ -24,7 +24,7 @@
 			<li>
 				<a href="<?php echo base_url('admin/attr/index').'/'.$tid ?>">属性列表</a>
 			</li>
-			<li class="active"><a href="#">添加属性</a></li>
+			<li class="active"><a href="#">编辑属性</a></li>
 		</ul>
 		<form action="#" method="post">
 			<table class="table edit">
@@ -45,7 +45,7 @@
 					<tr>
 						<td>显示方式</td>
 						<td>
-							<select name="show_type" class="form-control" required >
+							<select name="show_type" class="form-control" <?php if(isset($aid)) echo 'disabled'?> >
 								<option value="1">文本框</option>
 								<option value="2">单选框</option>
 								<option value="3">复选框</option>
@@ -56,25 +56,29 @@
 					<tr id="input">
 						<td>属性值</td>
 						<td >
-							<input type="text" name='attr_value[]' value="<?php echo $attr['value']['0']['attr_value'] ?>" class="form-control" />
+							<input type="text" name='attr_value[]' value="<?php echo $value['0']['attr_value'] ?>" class="form-control" />
 						</td>
 					</tr>
 					<tr id="select">
 						<td>属性值</td>
 						<td>
-							<?php foreach ($attr['value'] as $v): ?>
-								<p>
-									<input type="text" name='attr_value[]' value="<?php echo $v['attr_value'] ?>" class="form-control" />
+							<?php $i=0;foreach ($value as $v): $i++;?>
+							<p>
+							<input type="text" name="attr_value[id_<?php if(isset($v['av_id'])) echo $v['av_id'] ?>]" value="<?php echo $v['attr_value'] ?>" class="form-control" />
+								<?php if ($i==1): ?>
 									<a href="javascript:void(0)" class="btn btn-default" id="add_node">添加</a>
-								</p>
-							<?php endforeach ?>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<input type="submit" class="btn btn-primary" value="确定"/>
-		</form>
-	</div>
+								<?php else: ?>
+									<a href="javascript:void(0)" class="btn btn-default remove_node">移除</a>
+								<?php endif ?>
+							</p>
+						<?php endforeach ?>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<input type="submit" class="btn btn-primary" value="确定"/>
+	</form>
+</div>
 </div>
 <script>
 	$(document).ready(function(){

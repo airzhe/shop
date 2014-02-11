@@ -6,7 +6,7 @@
 				<i class="fa fa-home"></i>
 				<a href="#">Home</a>
 			</li>
-			<li class="active"><?php echo $tab_title ?>分类</li>
+			<li class="active">属性分类</li>
 		</ul>
 	</div>
 	<div class="page-content">
@@ -18,15 +18,16 @@
 			</div> -->
 			<ul class="nav nav-tabs">
 				<li class="active">
-					<a href="#"><?php echo $tab_title ?>列表</a>
+					<a href="#">属性列表</a>
 				</li>
-				<li><a href="<?php if($tab_title=='属性'){echo site_url('admin/attr/edit').'/'.$tid; }else{echo site_url('admin/spec/edit').'/'.$tid; }?>"><i class="fa fa-plus-circle"></i> 添加<?php echo $tab_title ?></a></li>
+				<li><a href="<?php echo site_url('admin/attr/edit').'/'.$tid ?>"><i class="fa fa-plus-circle"></i> 添加属性</a></li>
 			</ul>
-			<table class="table list">
+			<table class="table table-hover list">
 				<thead>
 					<tr>
 						<th>aid</th>
-						<th><?php echo $tab_title ?>名称</th>
+						<th>属性名称</th>
+						<th>展示类型</th>
 						<th>操作</th>
 					</tr>
 				</thead>
@@ -35,8 +36,9 @@
 						<tr>
 							<td><?php echo $v['aid'] ?></td>
 							<td><?php echo $v['attr_name'] ?></td>
+							<td><?php echo $v['type'] ?></td>
 							<td>
-								<a href="<?php if($tab_title=='属性'){echo site_url('admin/attr/edit').'/'.$tid.'/'.$v['aid'];}else{echo site_url('admin/spec/edit').'/'.$tid.'/'.$v['aid'];} ?>">编辑</a>
+								<a href="<?php echo site_url('admin/attr/edit').'/'.$tid.'/'.$v['aid'] ?>">编辑</a>
 								<a href="#">删除</a>
 							</td>
 						</tr>

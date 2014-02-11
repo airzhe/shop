@@ -1,4 +1,15 @@
-#codeigniter_profiler{margin-left:190px;}
+/*CI调试信息样式*/
+#codeigniter_profiler{
+	cursor: pointer;
+	margin-left:190px;
+}
+#codeigniter_profiler fieldset{
+	display: none;
+}
+#codeigniter_profiler:hover fieldset{
+	display: block;
+}
+/*CI调试信息样式结束*/
 
 /*头部*/
 .header{height:45px;background:#438eb9;padding:0 20px}
