@@ -1,8 +1,46 @@
 
 table.edit tbody tr > td:first-child{width: 100px;vertical-align: middle;}
 table.edit tbody td  [type="text"]{width: 300px;}
-table.edit tbody td  [name="show_type"] {width: 300px;}
+table.edit tbody td  select {width: 300px;}
+table.edit tbody td  textarea {width: 400px;}
 table.edit tbody tr  input{float:left;}
 table.edit tbody td  [type="text"] + .btn{margin-left: 20px;}
 
 table.list tr>td:last-child{width:200px;}
+/*品牌页面*/
+table.table.brand td{vertical-align: middle;}
+
+table.edit tbody label{vertical-align: middle;}
+
+.tab-pane table tr:first-child td{border-top:none;}
+.tab-pane table tr td:first-child{width: 100px;}
+
+.tab-content.category ul{padding:0;margin-top: 20px;}
+.tab-content.category ul li{
+	list-style:none;float:left;
+	padding:20px;
+	/*background: #ccc;*/
+	margin:10px;
+	border-radius:4px;
+	border:1px solid #ddd;
+	vertical-align: middle;
+	cursor:pointer;
+	background: url(../images/select.gif) no-repeat right 0;
+}
+.tab-content.category ul li:hover{
+	border-width: 2px;
+	border-color:#FDA316;
+	margin:9px;
+}
+.tab-content.category ul li.active{
+	background-image: url(../images/selected.gif)
+}
+
+.tab-content.category li p{
+	text-align: center;
+}
+
+.tab-content.category ul li img+span{display: block;text-align: center;margin-top:5px;}
+[type="checkbox"]{
+	vertical-align:-2px;
+}

@@ -31,15 +31,15 @@
 			</a>
 		</li>
 		<li>
-			<a href="<?php echo base_url('admin/article')?>">
+			<a href="<?php echo base_url('admin/brand')?>">
 				<i class="fa fa-pencil"></i>
-				<span class="menu-text"> 文章管理 </span>
+				<span class="menu-text"> 品牌管理 </span>
 			</a>
 		</li>
 		<li>
-			<a href="<?php echo base_url('admin/settings')?>">
+			<a href="<?php echo base_url('admin/category')?>">
 				<i class="fa fa-cog"></i>
-				<span class="menu-text"> 网站配置 </span>
+				<span class="menu-text"> 栏目管理 </span>
 			</a>
 		</li>
 		<li>

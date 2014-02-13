@@ -10,6 +10,9 @@ Class Goods_Type extends Admin_Controller{
 	// 列表展示
 	public function index (){
 		$goods_type_list=$this->Goods_type_model->get();
+		// 存入缓存
+		$this->cache->save('goods_type_list', $goods_type_list,0);
+		// 缓存结束
 		$this->data['goods_type_list']=$goods_type_list;
 		$this->view('goods_type',$this->data);
 	}

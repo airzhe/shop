@@ -86,6 +86,7 @@ class Admin_Controller extends Base_Controller{
 		parent::__construct();
 		$this->data['meta_title']='后盾商城后台';
 		$this->output->enable_profiler(TRUE);
+		$this->load->driver('cache', array('adapter' => 'memcached', 'backup' => 'file'));
 	}
 	function view($view, $vars = array(), $string=false)
 	{

@@ -54,9 +54,16 @@ class MY_Model extends CI_Model {
 		$this->db->where($where);
 		return $this->get(NULL, $single);
 	}
+
+	public function get_field($field, $where){
+		$this->db->select($field);
+		$this->db->where($where);
+		$data=$this->get(NULL, TRUE);
+		return current($data);
+	}
 	
 
-	public function save($data, $id = NULL){
+	public function save($data=NULL, $id = NULL){
 		
 		// Set timestamps
 		if ($this->_timestamps == TRUE) {

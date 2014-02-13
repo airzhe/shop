@@ -79,7 +79,6 @@
 		<input type="submit" class="btn btn-primary" value="确定"/>
 	</form>
 </div>
-</div>
 <script>
 	$(document).ready(function(){
 		// 选择相应的属性值编辑方式
