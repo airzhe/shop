@@ -22,7 +22,7 @@
 		</div> -->
 		<ul class="nav nav-tabs">
 			<li>
-				<a href="<?php echo base_url('admin/attr/index').'/'.$tid ?>">属性列表</a>
+				<a href="<?php echo base_url('admin/spec/index').'/'.$tid ?>">规格列表</a>
 			</li>
 			<li class="active"><a href="#">添加规格</a></li>
 		</ul>
@@ -45,16 +45,20 @@
 						</td>
 					</tr>
 					
-					<tr>
+					<tr id="select">
 						<td>属性值</td>
 						<td>
-							<?php foreach ($attr['value'] as $v): ?>
-								<p>
-									<input type="text" name='attr_value[]' value="<?php echo $v['attr_value'] ?>" class="form-control" />
+							<?php $i=0;foreach ($value as $v): $i++;?>
+							<p>
+								<input type="text" name="attr_value[id_<?php if(isset($v['av_id'])) echo $v['av_id'] ?>]" value="<?php echo $v['attr_value'] ?>" class="form-control" />
+								<?php if ($i==1): ?>
 									<a href="javascript:void(0)" class="btn btn-default" id="add_node">添加</a>
-								</p>
-							<?php endforeach ?>
-						</td>
+								<?php else: ?>
+									<a href="javascript:void(0)" class="btn btn-default remove_node">移除</a>
+								<?php endif ?>
+							</p>
+						<?php endforeach ?>
+					</td>
 					</tr>
 				</tbody>
 			</table>

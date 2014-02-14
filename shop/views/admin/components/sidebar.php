@@ -43,6 +43,12 @@
 			</a>
 		</li>
 		<li>
+			<a href="<?php echo base_url('admin/goods/edit')?>">
+				<i class="fa fa-cog"></i>
+				<span class="menu-text"> 添加商品 </span>
+			</a>
+		</li>
+		<li>
 			<a href="#">
 				<i class="fa fa-text-width"></i>
 				<span class="menu-text"> Typography </span>

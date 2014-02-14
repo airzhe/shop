@@ -21,6 +21,7 @@ Class Spec extends Admin_Controller{
 	}
 	// 添加 更新
 	public function edit ($tid,$aid=NULL){
+
 		if($this->input->post()){
 			$rules =$this->Attr_model->rules;
 			$this->form_validation->set_rules($rules);
@@ -29,9 +30,10 @@ Class Spec extends Admin_Controller{
 				$aid || $aid=NULL;
 				$arr=array('attr_name','tid');
 				// 编辑状态下不取show_type值
-				if(!$aid) $arr+=array('show_type');
+				if(!$aid) $arr[]='show_type';
 	
 				$data=$this->Attr_model->array_from_post($arr);
+				$data['is_spec']=1;
 				$aid=$this->Attr_model->save($data,$aid);
 
 				// 属性值插入attr_value表
@@ -64,7 +66,7 @@ Class Spec extends Admin_Controller{
 			}
 			// p($this->data['attr']);
 			$this->data['tid']=$tid;
-			$this->view('attr_edit.php',$this->data);
+			$this->view('spec_edit.php',$this->data);
 		}
 	}
 }

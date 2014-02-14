@@ -38,7 +38,7 @@
 								
 								<select name="tid" class="form-control">
 									<?php foreach ($goods_type_list as  $v): ?>
-										<option value="<?php echo $v['tid'] ?>"><?php echo $v['gtname'] ?></option>
+										<option value="<?php echo $v['tid'] ?>" <?php if(isset($v['selected'])) echo $v['selected'] ?>><?php echo $v['gtname'] ?></option>
 									<?php endforeach ?>
 								</select>
 							</td>
@@ -46,15 +46,15 @@
 						<tr>
 							<td>上级栏目</td>
 							<td>
-								<?php if (is_array($category)): ?>
-									<select name="pid" class="form-control">
-										<?php foreach ($category as $v): ?>
-											<option value="<?php echo $v['cid'] ?>"><?php echo $v['cname'] ?></option>
-										<?php endforeach ?>
-									</select>
-								<?php else: ?>
-									顶级栏目
-								<?php endif ?>
+								<select name="pid" class="form-control">
+									<?php if (!isset($category['pid'])): ?>
+										<option value="0">顶级栏目</option>
+									<?php endif ?>
+									
+									<?php foreach ($category as $v): ?>
+										<option level="<?php echo $v['level'] ?>" value="<?php echo $v['cid'] ?>" <?php echo $v['selected'] ?> ><?php echo $v['html'].$v['cname'] ?></option>
+									<?php endforeach ?>
+								</select>
 							</td>
 						</tr>
 						<tr>
@@ -67,10 +67,10 @@
 							<td>栏目类型</td>
 							<td>
 								<label>
-									<input type="radio" name="cat_type" value="1" checked="checked"> 封面栏目 
+									<input type="radio" name="cat_type" value="1" checked="checked"> 普通栏目 
 								</label>
 								<label>
-									<input type="radio" name="cat_type" value="2">  普通栏目
+									<input type="radio" name="cat_type" value="2" <?php if (isset($cate['cat_type']) && $cate['cat_type']==2 ) echo ' checked="checked"' ?> >  封面栏目
 								</label>
 							</td>
 						</tr>
@@ -107,10 +107,10 @@
 					</table>
 				</div>
 				<!-- 品牌 -->
-				<div class="tab-pane" id="brand">
+				<div class="tab-pane" id="brand" >
 					<ul class="clearfix">
 						<?php foreach ($brand_list as $v): ?>
-							<li>
+							<li class="brand_<?php echo $v['bid'] ?>">
 								<img src="<?php echo base_url($v['logo']) ?>" alt="" heiht="30">
 								<span> <input type="checkbox" name="bid[]" value="<?php echo $v['bid'] ?>" class="hide" > <?php echo $v['bname'] ?></span>
 							</li>
@@ -124,11 +124,32 @@
 </div>
 <script>
 	$(document).ready(function(){
+		// 通过图片点击切换checkbox是否选中
 		$('#brand').find('li').on('click',function(){
 			$(this).toggleClass('active');
 			var checkbox=$(this).find(':checkbox').get(0);
 			// console.log(checkbox.checked);
 			checkbox.checked=!checkbox.checked;
 		})
+		// 如果select内容只有一个，替换为span节点
+		$('select').each(function(){
+			if($(this).children('option').length==1){
+				var txt=$(this).children('option').text();
+				$(this).before($('<span>',{text:txt})).hide();
+			}
+		})
+		// 禁止向自身或子元素移动
+
+		var curr_cate=$("[name='pid']").find("[selected]");
+		var level=curr_cate.attr('level');
+		var selector=$("[level="+level+"]");
+		curr_cate.nextUntil(selector).andSelf().attr('disabled','disabled');
+
+		//编辑时选中品牌
+
+		var brand=[<?php echo $brand ?>];
+		for(var key in brand){
+			$('.brand_' + brand[key]).trigger('click');
+		}
 	})
 </script>

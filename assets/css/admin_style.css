@@ -44,3 +44,36 @@ table.edit tbody label{vertical-align: middle;}
 [type="checkbox"]{
 	vertical-align:-2px;
 }
+
+table#category td:nth-of-type(2) s{position:relative;color:#ccc;margin-right:5px}
+table#category td:nth-of-type(2) s:not(:last-of-type){color:#fff}
+table#category td:nth-of-type(2) s:before{display:block;content:"";position:absolute;top:-4px;bottom:-4px;left:0;width:1px;max-width:1px;overflow:hidden;background-color:#ccc}
+
+
+.node_edit{
+	padding: 5px;
+	cursor: pointer;
+}
+
+
+table.edit tbody td.category select{
+	width:auto;
+	margin-right: 10px;
+	float: left;
+}
+input[type="radio"],input[type="checkbox"]{
+	margin-right: 2px;
+}
+label{
+	margin-right: 3px;
+	font-weight: 400;
+}
+
+#cke_body{width: 600px;}
+.bg-info {
+	padding:10px;
+	border:1px solid #ddd;
+	border-bottom: none;
+	background-color: rgb(217, 237, 247);
+	margin-bottom: 0;
+}

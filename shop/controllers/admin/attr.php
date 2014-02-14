@@ -34,7 +34,7 @@ Class Attr extends Admin_Controller{
 				$aid || $aid=NULL;
 				$arr=array('attr_name','tid');
 				// 编辑状态下不取show_type值
-				if(!$aid) $arr+=array('show_type');
+				if(!$aid) $arr[]='show_type';
 	
 				$data=$this->Attr_model->array_from_post($arr);
 				$aid=$this->Attr_model->save($data,$aid);

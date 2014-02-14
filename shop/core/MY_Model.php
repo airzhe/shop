@@ -95,14 +95,9 @@ class MY_Model extends CI_Model {
 	/**
 	 * delete
 	 */
-	public function delete($id){
-		$filter = $this->_primary_filter;
-		$id = $filter($id);
+	public function delete($where){
 		
-		if (!$id) {
-			return FALSE;
-		}
-		$this->db->where($this->_primary_key, $id);
+		$this->db->where($where);
 		$this->db->limit(1);
 		$this->db->delete($this->_table_name);
 	}

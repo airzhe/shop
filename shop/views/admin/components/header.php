@@ -11,6 +11,9 @@
 	<script src="<?php echo site_url('assets/js/jquery-1.10.2.min.js'); ?>"></script>
 	<script src="<?php echo site_url('assets/js/bootstrap.js'); ?>"></script>
 	<script src="<?php echo site_url('assets/js/admin.js'); ?>"></script>
+	<script>
+		var site_url="<?php echo site_url() ?>"
+	</script>
 </head>
 <body>
 	<div class="header">
@@ -271,4 +274,4 @@
 			</ul><!--/.ace-nav-->
 		</div>
 	</div>
-<div class="wrapper">
+	<div class="wrapper">

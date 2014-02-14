@@ -19,10 +19,10 @@ class Category_model extends MY_Model {
 		parent::__construct();
 	}
 
-	public function save_data(){
+	public function save_data($cid){
 		$data=$this->input->post();
 		unset($data['bid']);
-		return $this->save($data);
+		return $this->save($data,$cid);
 	}
 
 	public function get_new(){

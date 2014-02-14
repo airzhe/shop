@@ -64,7 +64,7 @@
 						<td>
 							<?php $i=0;foreach ($value as $v): $i++;?>
 							<p>
-							<input type="text" name="attr_value[id_<?php if(isset($v['av_id'])) echo $v['av_id'] ?>]" value="<?php echo $v['attr_value'] ?>" class="form-control" />
+								<input type="text" name="attr_value[id_<?php if(isset($v['av_id'])) echo $v['av_id'] ?>]" value="<?php echo $v['attr_value'] ?>" class="form-control" />
 								<?php if ($i==1): ?>
 									<a href="javascript:void(0)" class="btn btn-default" id="add_node">添加</a>
 								<?php else: ?>
