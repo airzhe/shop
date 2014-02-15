@@ -85,7 +85,15 @@ class Admin_Controller extends Base_Controller{
 	function __construct(){
 		parent::__construct();
 		$this->data['meta_title']='后盾商城后台';
+		
+		// 获取配置文件写入$this->config
+		$_config=$this->db->select(array('name','value'))->get('settings')->result_array();
+		foreach ($_config as  $v) {
+			$this->config->set_item($v['name'], $v['value']);
+		}
+		// 开启调试
 		$this->output->enable_profiler(TRUE);
+		// 开启缓存
 		$this->load->driver('cache', array('adapter' => 'memcached', 'backup' => 'file'));
 	}
 	function view($view, $vars = array(), $string=false)

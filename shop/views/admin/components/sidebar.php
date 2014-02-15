@@ -49,6 +49,12 @@
 			</a>
 		</li>
 		<li>
+			<a href="<?php echo base_url('admin/settings')?>">
+				<i class="fa fa-cog"></i>
+				<span class="menu-text"> 系统配置 </span>
+			</a>
+		</li>
+		<li>
 			<a href="#">
 				<i class="fa fa-text-width"></i>
 				<span class="menu-text"> Typography </span>

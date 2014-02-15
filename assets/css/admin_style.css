@@ -77,3 +77,6 @@ label{
 	background-color: rgb(217, 237, 247);
 	margin-bottom: 0;
 }
+/*系统设置*/
+table.settings tbody tr > td:first-child{text-align:right;width: 160px;vertical-align: middle;}
+table.settings tbody td  [type="text"]{width: 300px;}
