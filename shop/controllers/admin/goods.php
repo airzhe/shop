@@ -10,19 +10,8 @@ class Goods extends Admin_Controller{
 		$this->load->model('Goods_Attr_model');
 		$this->load->model('Category_model');
 		// $this->load->model('Brand_Category_model');
-		// $this->load->library('categoryd');
-		// $this->load->library('code');
 	}
 	public function index(){
-		// p(get_class_methods($this->db));
-		// $category=$this->Category_model->get();
-
-		// $categoryd=$this->categoryd->unlimitedForLevel($category);
-		// // p($categoryd);
-
-		// $this->cache->save('categoryd',$categoryd,0);
-		// // p($categoryd);
-		// $this->data['categoryd']=$categoryd;
 		$this->view('goods_edit',$this->data);
 	}
 	// 添加 更新
@@ -33,12 +22,13 @@ class Goods extends Admin_Controller{
 
 			if ($this->form_validation->run() == TRUE){
 				
-				$gid || $gid=NULL;
+				
+				$gid || $gid = NULL;
 				
 				if($_gid=$this->Goods_model->save_data($gid)){
 					$this->Goods_Attr_model->save_data($_gid);
 				}
-				success('操作成功',"admin/category/");
+				// success('操作成功',"admin/category/");
 			}else{
 				echo validation_errors(); 
 			}

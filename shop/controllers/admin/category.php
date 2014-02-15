@@ -19,7 +19,6 @@ class Category extends Admin_Controller{
 		// p($categoryd);
 
 		$this->cache->save('categoryd',$categoryd,0);
-		$this->cache->clean();
 		// p($categoryd);
 		$this->data['categoryd']=$categoryd;
 		$this->view('category',$this->data);

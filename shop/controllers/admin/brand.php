@@ -36,6 +36,8 @@ Class Brand extends Admin_Controller{
 						$arr=$this->upload->data();
 						$logo=$config['upload_path'].$arr['file_name'];
 						$data+=array('logo'=>$logo);
+					}else{
+						echo $this->upload->display_errors();
 					}
 				}
 				if($bid && isset($data['logo'])){

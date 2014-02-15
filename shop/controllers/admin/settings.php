@@ -38,7 +38,7 @@ class Settings extends Admin_Controller{
 						$checked=$_arr['0']==$v['value']?'checked':'';
 
 						$_val=$checked?$v['value']:1-$v['value'];
-						$settings[$k]['value'].="<label><input type='radio' name={$v['name']} value={$_val} $checked />&nbsp;{$_arr['1']}</label>&nbsp;&nbsp;&nbsp;&nbsp;";
+						@$settings[$k]['value'].="<label><input type='radio' name={$v['name']} value={$_val} $checked />&nbsp;{$_arr['1']}</label>&nbsp;&nbsp;&nbsp;&nbsp;";
 					}
 					break;
 				}

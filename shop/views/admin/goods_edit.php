@@ -20,7 +20,7 @@
 				</small>
 			</h1>
 		</div> -->
-		<form  method="post">
+		<form  method="post" enctype="multipart/form-data">
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#home" data-toggle="tab">基本设置</a></li>
 				<li><a href="#profile" data-toggle="tab">扩展配置</a></li>
@@ -129,7 +129,7 @@
 					<table class="table edit">
 						<tr>
 							<td><a href="javascript:void(0)" id="add_node_pic" class="node_edit">[+]</a></td>
-							<td><input type="file" name="pic[]"></td>
+							<td><input type="file" name="pics[]"></td>
 						</tr>
 					</table>
 				</div>
@@ -187,6 +187,8 @@
 
 		$('td.category').find('a').on('click',function(){
 			$('table.attr').remove();
+			$('table.spec').remove();
+			$('p.bg-info').remove();
 			var cid=$(this).prev('select').val();
 			if(cid==0){
 				alert('请选择');

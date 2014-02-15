@@ -36,7 +36,7 @@
 						<tr>
 							<td><?php echo $v['bid'] ?></td>
 							<td><?php echo $v['bname'] ?></td>
-							<td> <img src="<?php echo base_url($v['logo']) ?>" alt="" heiht="30"> </td>
+							<td> <img src="<?php echo base_url($v['logo']) ?>" alt="" height="30"> </td>
 							<td>
 								<a href="<?php echo site_url('admin/brand/edit').'/'.$v['bid'] ?>">修改</a>
 								<a href="#">删除</a>
@@ -45,6 +45,5 @@
 					<?php endforeach ?>
 				</tbody>	
 			</table>
-		</form>
-	</div>
+		</div>
 </div>

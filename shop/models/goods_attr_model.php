@@ -20,11 +20,13 @@ class Goods_Attr_model extends MY_Model {
 	}
 
 	public function save_data($gid,$ga_id=NULL){
-		// if(!isset($this->input->post('attr')) return;
-		$category_cid=$this->input->post('cid');
-
-		$data=array('category_cid'=>$category_cid,'goods_gid'=>$gid);
+		// 如果没有属性就返回
 		$attr=$this->input->post('attr');
+		if(empty($attr)) return;
+
+		$category_cid=$this->input->post('cid');
+		$data=array('category_cid'=>$category_cid,'goods_gid'=>$gid);
+		
 		// 格式化数组
 		foreach ($attr as $k => $v) {
 			if(is_array($v)){
