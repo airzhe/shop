@@ -27,8 +27,9 @@ class Goods_model extends MY_Model {
 		$data['flag']=$flag;
 		$data['addtime']=strtotime($_POST['addtime']);
 		
-		if(count($_FILES)){
-			$pic=$this->upload();
+		$file=$_FILES['pic'];
+		if($file['error']==0 and is_uploaded_file($file['tmp_name'])){
+			$pic=$this->upload($file);
 			$data['pic']=$pic;
 			$this->zoom($pic);
 		}
@@ -38,9 +39,7 @@ class Goods_model extends MY_Model {
 	/**
 	 * 上传产品图片
 	 */
-	private function upload(){
-
-		$file=$_FILES['pic'];
+	private function upload($file){
 		$info = pathinfo($file['name']);
 		// 路径
 		$upload_path='images/'.date("Ym").'/source_img/';
@@ -64,6 +63,7 @@ class Goods_model extends MY_Model {
 			return $config['upload_path'].$arr['file_name'];
 		}else{
 			echo $this->upload->display_errors();
+			die;
 		}
 	}
 

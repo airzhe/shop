@@ -9,6 +9,7 @@ class Goods extends Admin_Controller{
 		$this->load->model('Goods_model');
 		$this->load->model('Goods_Attr_model');
 		$this->load->model('Category_model');
+		$this->load->model('Stock_model');
 		// $this->load->model('Brand_Category_model');
 	}
 	public function index(){
@@ -16,16 +17,21 @@ class Goods extends Admin_Controller{
 	}
 	// 添加 更新
 	public function edit ($gid=NULL){
+	
 		if($this->input->post()){
+				// p($this->input->post());die;
 			$rules =$this->Goods_model->rules;
 			$this->form_validation->set_rules($rules);
 
 			if ($this->form_validation->run() == TRUE){
 				
 				$gid || $gid = NULL;
-				
+				# 商品表
 				if($_gid=$this->Goods_model->save_data($gid)){
+					# 商品属性表
 					$this->Goods_Attr_model->save_data($_gid);
+					# 库存表和库存属性关联表
+					$this->Stock_model->save_data($_gid);
 				}
 				success('操作成功',"admin/category/");
 			}else{
@@ -136,14 +142,14 @@ class Goods extends Admin_Controller{
 		}
 		$html.='<td>库存</td><td>价格</td><td>货号</td></tr><tr><td><a href="javascript:void(0)" id="add_node_spec" class="node_edit">[+]</a></td>';
 		foreach ($attr as  $k=>$v) {
-			$html.="<td><select class='form-control'>";
+			$html.="<td><select name='spec[$v[aid]][]' class='form-control'>";
 			foreach ($v['attr_value'] as $k => $_v) {
 				$html.="<option value='{$_v['av_id']}'>{$_v['attr_value']}</option>";
 			}
 		}
-		$html.="<td><input type='text' name='' class='form-control'/></td>
-		<td><input type='text' name='' class='form-control'/></td>
-		<td><input type='text' name='' class='form-control'/></td>";
+		$html.="<td><input type='text' name='_stock[stock][]' class='form-control'/></td>
+		<td><input type='text' name='_stock[price][]' class='form-control'/></td>
+		<td><input type='text' name='_stock[goods_sn][]' class='form-control'/></td>";
 		$html.="</tr></table>";
 		$html.="</select></td>";
 		$html.='</table>';
