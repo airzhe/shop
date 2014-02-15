@@ -22,13 +22,12 @@ class Goods extends Admin_Controller{
 
 			if ($this->form_validation->run() == TRUE){
 				
-				
 				$gid || $gid = NULL;
 				
 				if($_gid=$this->Goods_model->save_data($gid)){
 					$this->Goods_Attr_model->save_data($_gid);
 				}
-				// success('操作成功',"admin/category/");
+				success('操作成功',"admin/category/");
 			}else{
 				echo validation_errors(); 
 			}

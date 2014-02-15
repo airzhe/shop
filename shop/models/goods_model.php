@@ -29,7 +29,6 @@ class Goods_model extends MY_Model {
 		
 		if(count($_FILES)){
 			$pic=$this->upload();
-			echo $pic;
 			$data['pic']=$pic;
 			$this->zoom($pic);
 		}
@@ -73,7 +72,46 @@ class Goods_model extends MY_Model {
 	 */
 	private function zoom($img){
 		if(!is_file($img)) return;
-		
+		// 加载图像处理类
+		$this->load->library('image_lib'); 
+		$arr=explode('/',$img);
+		// 主页图片宽高
+		$index_thumb_width=$this->config->item('index_thumb_width');
+		$index_thumb_height=$this->config->item('index_thumb_height');
+		// 栏目图片宽高
+		$list_thumb_width=$this->config->item('list_thumb_width');
+		$list_thumb_height=$this->config->item('list_thumb_height');
+		// 主页图片配置
+		$index_img=array(
+			'path'=>'index_thumb',
+			'width'=>$index_thumb_width,
+			'height'=>$index_thumb_height,
+			);
+		// 栏目图片配置
+		$list_img=array(
+			'path'=>'list_thumb',
+			'width'=>$list_thumb_width,
+			'height'=>$list_thumb_height,
+			);
+		$zoom_img=array($index_img,$list_img);
+		// 图片物理目录
+		$new_path=$arr[0].'/'.$arr[1].'/';
+		is_dir($new_path);
+		// 加载图像处理类
+		$config['source_image'] = $img;
+		$config['maintain_ratio'] = TRUE;
+		// 缩略图文件名
+		$file_name=basename($img);
+		// 遍历数组创建主页和列表页缩略图
+		foreach ($zoom_img as $v) {
+			$path=$new_path.$v['path'];
+			is_dir($path) || mkdir($path);
+			$config['width'] = $v['width'];
+			$config['height'] = $v['height'];
+			$config['new_image'] = $path.'/'.$file_name;
+			$this->image_lib->initialize($config);
+			$this->image_lib->resize();
+		}
 	}
 
 	public function get_new(){
