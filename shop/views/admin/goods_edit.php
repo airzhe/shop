@@ -30,19 +30,28 @@
 
 			<!-- Tab panes -->
 			<!-- 基本设置 -->
-			<div class="tab-content">
+			<div class="tab-content goods">
 				<div class="tab-pane active" id="home">
 					<table class="table table-condensed edit">
 						<tr>
 							<td>栏目</td>
-							<td class="category">
-								<select name="cid" class="form-control">
-									<option value="0">请选择</option>
-									<?php foreach ($category_list as  $v): ?>
-										<option value="<?php echo $v['cid'] ?>" ><?php echo $v['cname'] ?></option>
-									<?php endforeach ?>
-								</select>
-								<a href="javascript:void(0)" class="btn btn-default">确定</a>
+							<td class="category" data-cid="<?php echo $goods['cid'] ?>">
+								<?php if ($goods['cid']): ?>
+									<div class="category_text" style="display:none;" >
+										<?php echo $category ?>
+										<input type="hidden" disabled name="cid" value="<?php echo $goods['cid'] ?>">
+										<a href="javascript:void(0)" id="edit_category">编辑</a>
+									</div>
+								<?php endif ?>
+								<div class="category_select" style="display:none">
+									<select name="cid" class="form-control" disabled>
+										<option value="0">请选择</option>
+										<?php foreach ($category_list as  $v): ?>
+											<option value="<?php echo $v['cid'] ?>" ><?php echo $v['cname'] ?></option>
+										<?php endforeach ?>
+									</select>
+									<a href="javascript:void(0)" class="btn btn-default">确定</a>
+								</div>
 							</td>
 						</tr>
 						<tr>
@@ -55,10 +64,10 @@
 							<td>属性</td>
 							<td>
 								<label>
-									<input type="checkbox" name="flag[]" value="推荐" checked="checked"> 推荐 
+									<input type="checkbox" name="flag[]" value="推荐" <?php if(strpos($goods['flag'],'推荐')!==false) echo "checked" ?>> 推荐 
 								</label>
 								<label>
-									<input type="checkbox" name="flag[]" value="置顶" <?php if (isset($cate['cat_type']) && $cate['cat_type']==2 ) echo ' checked="checked"' ?> >  置顶
+									<input type="checkbox" name="flag[]" value="置顶" <?php if(strpos($goods['flag'],'置顶')!==false) echo "checked" ?>> 置顶
 								</label>
 							</td>
 						</tr>
@@ -66,6 +75,9 @@
 							<td>商品图片</td>
 							<td>
 								<input type="file" name="pic">
+								<?php if (isset($goods['index_pic'])): ?>
+									<img src="<?php echo base_url($goods['index_pic']) ?>" alt="" height="50">
+								<?php endif ?>
 							</td>
 						</tr>
 						<tr>
@@ -126,6 +138,16 @@
 				</div>
 				<!-- 内容页展示图片 -->
 				<div class="tab-pane" id="pic" >
+					<?php if (isset($goods_pic)): ?>
+						<ul class="clearfix">
+							<?php foreach ($goods_pic as $v): ?>
+								<li>
+									<img width="150" class="img-thumbnail" src="<?php echo base_url($v['medium']) ?>" alt="">
+									<i class="fa fa-times red"></i>
+								</li>
+							<?php endforeach ?>
+						</ul>
+					<?php endif ?>
 					<table class="table edit">
 						<tr>
 							<td><a href="javascript:void(0)" id="add_node_pic" class="node_edit">[+]</a></td>
@@ -135,7 +157,14 @@
 				</div>
 				<!-- 品牌 -->
 				<div class="tab-pane" id="brand" >
-					
+					<ul class="clearfix">
+						<?php foreach ($brand_list as $v): ?>
+							<li class="brand_<?php echo $v['bid'] ?>">
+								<img src="<?php echo base_url($v['logo']) ?>" alt="" heiht="30">
+								<span> <input type="radio" name="brand_bid" value="<?php echo $v['bid'] ?>"  > <?php echo $v['bname'] ?></span>
+							</li>
+						<?php endforeach ?>
+					</ul>
 				</div>
 			</div>
 			<input type="submit" class="btn btn-primary" value="确定"/>
@@ -152,7 +181,7 @@
 		$('#add_node_pic').on('click',function(){
 			var node='<tr>\
 			<td><a href="javascript:void(0)" class="node_edit remove_node">[-]</a></td>\
-			<td><input type="file" name="pic[]"></td>\
+			<td><input type="file" name="pics[]"></td>\
 		</tr>';
 		$(node).appendTo($(this).parents('table'));
 	})
@@ -162,6 +191,7 @@
 			$(this).nextAll('select').remove();
 			var pid=this.value;
 			if(pid==0)return;
+			$(this).parents('td').data('cid',pid);
 			$(this).after($('<i>',{class:'fa fa-spinner'}))
 			//
 			var str='<select class="form-control" name="cid"><option selected value="0" class="null">请选择</option>';
@@ -189,7 +219,7 @@
 			$('table.attr').remove();
 			$('table.spec').remove();
 			$('p.bg-info').remove();
-			var cid=$(this).prev('select').val();
+			var cid=$(this).parents('td').data('cid');
 			if(cid==0){
 				alert('请选择');
 				return;
@@ -204,6 +234,27 @@
 					};
 				}
 			})
+			$.ajax({
+				url:site_url+'admin/category/get_brand/'+cid,
+				dataType:'json',
+				success:function(data){
+					if(data.status==1){
+						$('#brand').find('ul').html('');
+						$(data.brand_list).each(function(i){
+							var _brand=data.brand_list[i];
+							var brand='\
+							<li class="brand_'+_brand["bid"]+'">\
+								<img src="'+ site_url + _brand["logo"] +'" alt="" heiht="30">\
+								<span> <input type="radio" name="brand_bid" value="'+ _brand["bid"]+'"> '+ _brand["bname"] +'</span>\
+							</li>\
+							';
+							$(brand).appendTo($('#brand').find('ul'));
+						})
+					}else{
+						$('#brand').find('ul').html('<input type="radio" name="bid">');
+					}
+				}
+			})
 		})
 		// 添加规格节点
 		$('body').on('click','#add_node_spec',function(){
@@ -216,5 +267,51 @@
 		$('body').on('click','.remove_node',function(){
 			$(this).parents('tr').remove();
 		})
-	})
+		// 通过图片点击切换checkbox是否选中
+		$('#brand').on('click','li',function(){
+			$('#brand').find('li').removeClass();
+			$(this).addClass('active');
+			var radio=$(this).find(':radio').get(0);
+			// console.log(checkbox.checked);
+			radio.checked=true;
+		})
+		/**
+		 * 产品编辑js
+		 */
+		 if($("[name='gname']").val()!=''){
+		 	$('.category_text').show();
+		 	$("select[name='cid']").attr('disabled',true);
+		 	$("input[name='cid']").removeAttr('disabled');
+		 	$('.category_select').find('.btn').trigger('click');
+		 }else{
+		 	$('.category_select').show();
+		 	$("select[name='cid']").removeAttr('disabled');
+		 }
+		 $('#edit_category').on('click',function(){
+		 	$('.category_select').show();
+		 	$("select[name='cid']").removeAttr('disabled');
+		 	$('.category_text').hide();
+
+		 })
+		 //删除商品图片
+		 $('ul').on('click','.fa-times',function(){
+		 	var li=$(this).parents('li');
+		 	path=li.find('img').attr('src');
+		 	$.ajax({
+		 		url: site_url+'admin/goods/del_goods_pic',
+		 		type: 'post',
+		 		dataType: 'json',
+		 		data: {path:path,pic_id:pic_id},
+		 		success:function(data){
+		 			if(data.status==1){
+		 				li.fadeOut(400,function(){
+		 					$(this).remove();
+		 				});
+		 			}
+		 		}
+		 	})
+		 });
+		 //
+	//
+})
 </script>

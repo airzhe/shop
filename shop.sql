@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 02 月 15 日 21:07
+-- 生成日期: 2014 年 02 月 20 日 16:58
 -- 服务器版本: 5.5.35
 -- PHP 版本: 5.3.10-1ubuntu3.9
 
@@ -136,13 +136,16 @@ CREATE TABLE IF NOT EXISTS `hd_g_brand_category` (
 INSERT INTO `hd_g_brand_category` (`bid`, `cid`) VALUES
 (4, 9),
 (4, 10),
+(4, 23),
 (5, 9),
 (5, 10),
 (5, 19),
-(6, 17),
+(5, 23),
+(6, 19),
 (7, 12),
 (7, 17),
-(7, 19);
+(7, 19),
+(8, 22);
 
 -- --------------------------------------------------------
 
@@ -162,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `hd_g_category` (
   `tid` smallint(5) unsigned NOT NULL COMMENT '与商品类型表关联的外键',
   PRIMARY KEY (`cid`),
   KEY `fk_hd_g_category_hd_g_goods_type1_idx` (`tid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品栏目表' AUTO_INCREMENT=23 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品栏目表' AUTO_INCREMENT=24 ;
 
 --
 -- 转存表中的数据 `hd_g_category`
@@ -175,6 +178,7 @@ INSERT INTO `hd_g_category` (`cid`, `cname`, `pid`, `keywords`, `description`, `
 (12, '手机', 0, '', '', 1, '个', 5, 2),
 (13, '老人手机', 12, '', '', 1, '个', 5, 1),
 (14, '韩版西装', 9, '呵呵', '', 1, '套', 7, 1),
+(23, '运动服', 9, '', '', 1, '个', 5, 1),
 (17, '安卓', 12, '', '', 1, '个', 5, 3),
 (19, 'htc', 13, 'htc的确定', 'htc的的', 1, '个', 5, 3),
 (22, 'iphone', 12, '', '', 1, '个', 5, 3);
@@ -215,8 +219,8 @@ CREATE TABLE IF NOT EXISTS `hd_g_goods` (
 --
 
 INSERT INTO `hd_g_goods` (`gid`, `gname`, `price`, `stock`, `goods_sn`, `keywords`, `description`, `body`, `service`, `click`, `addtime`, `flag`, `pic`, `index_pic`, `list_pic`, `cid`, `brand_bid`, `admin_aid`) VALUES
-(2, 'iphone 5', 0.00, 0, '', '', '', '', '', 100, 1392462356, '推荐', 'images/201402/source_img/1392462367573.jpg', NULL, NULL, 22, 0, 0),
-(3, '学生西装', 100.00, 1000, '', '', '', '', '', 100, 1392464718, '推荐', NULL, NULL, NULL, 11, 0, 0),
+(2, 'iphone 5', 50000.00, 0, '', '', '', '', '', 1000, 0, '推荐', 'images/201402/source_img/d915b1103ac5ac67c83d6472cf5f5f6b.jpg', 'images/201402/index_thumb/d915b1103ac5ac67c83d6472cf5f5f6b.jpg', 'images/201402/list_thumb/d915b1103ac5ac67c83d6472cf5f5f6b.jpg', 22, 0, 0),
+(3, '运动服', 100.00, 1000, '', '', '', '', '', 100, 0, '推荐', NULL, NULL, NULL, 0, 0, 0),
 (4, 'iphone 5', 0.00, 0, '', '', '', '', '', 100, 1392465460, '推荐', NULL, NULL, NULL, 11, 0, 0),
 (5, '学生西装', 0.00, 0, '', '', '', '', '', 100, 1392466613, '推荐', NULL, NULL, NULL, 11, 0, 0),
 (6, '学生西装', 0.00, 0, '', '', '', '', '', 100, 1392466929, '推荐', NULL, NULL, NULL, 11, 0, 0),
@@ -245,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `hd_g_goods_attr` (
   KEY `fk_hd_g_goods_attr_hd_g_category1_idx` (`category_cid`),
   KEY `fk_hd_g_goods_attr_hd_g_goods1_idx` (`goods_gid`),
   KEY `fk_hd_g_goods_attr_hd_g_attr_value1_idx` (`attr_value_av_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品属性表' AUTO_INCREMENT=45 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品属性表' AUTO_INCREMENT=77 ;
 
 --
 -- 转存表中的数据 `hd_g_goods_attr`
@@ -275,7 +279,63 @@ INSERT INTO `hd_g_goods_attr` (`ga_id`, `attr_value`, `category_cid`, `goods_gid
 (41, '短款', 11, 13, 84),
 (42, '北京', 11, 13, 116),
 (43, '短款', 11, 14, 84),
-(44, '北京', 11, 14, 116);
+(44, '北京', 11, 14, 116),
+(45, '4.0', 17, 2, 92),
+(46, '4.0', 19, 2, 92),
+(47, '4.0', 17, 2, 92),
+(48, '短款', 23, 3, 84),
+(49, '北京', 23, 3, 116),
+(50, '短款', 0, 3, 84),
+(51, '北京', 0, 3, 116),
+(52, '4.0', 0, 2, 92),
+(53, '4.0', 22, 2, 92),
+(54, '4.0', 0, 2, 92),
+(55, '安卓', 22, 2, 93),
+(56, '4.0', 22, 2, 92),
+(57, '4.0', 0, 2, 92),
+(58, '4.0', 23, 2, 92),
+(59, '短款', 22, 2, 84),
+(60, '北京', 22, 2, 116),
+(61, '4.0', 22, 2, 92),
+(62, '4.0', 22, 2, 92),
+(63, '4.0', 22, 2, 92),
+(64, '4.0', 22, 2, 92),
+(65, '4.0', 22, 2, 92),
+(66, '4.0', 22, 2, 92),
+(67, '4.0', 22, 2, 92),
+(68, '4.0', 22, 2, 92),
+(69, '4.0', 22, 2, 92),
+(70, '4.0', 22, 2, 92),
+(71, '4.0', 22, 2, 92),
+(72, '4.0', 22, 2, 92),
+(73, '4.0', 22, 2, 92),
+(74, '4.0', 22, 2, 92),
+(75, '4.0', 22, 2, 92),
+(76, '4.0', 22, 2, 92);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `hd_g_goods_pic`
+--
+
+CREATE TABLE IF NOT EXISTS `hd_g_goods_pic` (
+  `pic_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `big` varchar(255) DEFAULT NULL COMMENT '大图',
+  `medium` varchar(255) DEFAULT NULL COMMENT '中图',
+  `small` varchar(255) DEFAULT NULL COMMENT '小图',
+  `goods_gid` int(10) unsigned NOT NULL COMMENT '商品的gid(与商品表关联)',
+  PRIMARY KEY (`pic_id`),
+  KEY `fk_hd_g_goods_pic_hd_g_goods1_idx` (`goods_gid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='内容页展示图片（局部放大的图片3张图)' AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `hd_g_goods_pic`
+--
+
+INSERT INTO `hd_g_goods_pic` (`pic_id`, `big`, `medium`, `small`, `goods_gid`) VALUES
+(1, 'images/201402/goods_big/4adf6e2e4815b89070af61c169357b9c.jpg', 'images/201402/goods_medium/4adf6e2e4815b89070af61c169357b9c.jpg', 'images/201402/goods_small/4adf6e2e4815b89070af61c169357b9c.jpg', 2),
+(2, 'images/201402/goods_big/747d518d6809b4c7db56e06b5b1c394b.jpg', 'images/201402/goods_medium/747d518d6809b4c7db56e06b5b1c394b.jpg', 'images/201402/goods_small/747d518d6809b4c7db56e06b5b1c394b.jpg', 2);
 
 -- --------------------------------------------------------
 
@@ -314,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `hd_g_settings` (
   `show_type` tinyint(1) NOT NULL COMMENT '1、input 2、radio',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- 转存表中的数据 `hd_g_settings`
@@ -326,7 +386,13 @@ INSERT INTO `hd_g_settings` (`id`, `title`, `name`, `value`, `conf`, `show_type`
 (4, ' 首页缩略图宽度', 'index_thumb_width', '200', '', 1),
 (5, ' 首页缩略图高度', 'index_thumb_height', '200', '', 1),
 (6, '列表页缩略图宽度', 'list_thumb_width', '150', '', 1),
-(7, '列表页缩略图高度', 'list_thumb_height', '150', '', 1);
+(7, '列表页缩略图高度', 'list_thumb_height', '150', '', 1),
+(8, '产品大图宽度', 'goods_big_width', '800', '', 1),
+(9, '产品大图高度', 'goods_big_height', '800', '', 1),
+(10, '产品中图宽度', 'goods_medium_width', '350', '', 1),
+(11, '产品中图高度', 'goods_medium_height', '350', '', 1),
+(12, '产品小图宽度', 'goods_small_width', '50', '', 1),
+(13, '产品小图高度', 'goods_small_height', '50', '', 1);
 
 -- --------------------------------------------------------
 
@@ -342,7 +408,7 @@ CREATE TABLE IF NOT EXISTS `hd_g_stock` (
   `goods_gid` int(10) unsigned NOT NULL COMMENT '商品gid(与商品表关联）',
   PRIMARY KEY (`st_id`),
   KEY `fk_hd_g_stock_hd_g_goods1_idx` (`goods_gid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品库存表' AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品库存表' AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `hd_g_stock`
@@ -350,7 +416,10 @@ CREATE TABLE IF NOT EXISTS `hd_g_stock` (
 
 INSERT INTO `hd_g_stock` (`st_id`, `price`, `stock`, `goods_sn`, `goods_gid`) VALUES
 (1, 2.00, 1, '3', 14),
-(2, 5.00, 4, '6', 14);
+(2, 5.00, 4, '6', 14),
+(3, 0.00, 0, '', 3),
+(4, 0.00, 0, '', 3),
+(5, 0.00, 0, '', 2);
 
 -- --------------------------------------------------------
 
@@ -369,7 +438,7 @@ CREATE TABLE IF NOT EXISTS `hd_g_stock_attr` (
   KEY `fk_hd_g_stock_attr_hd_g_goods1_idx` (`goods_gid`),
   KEY `fk_hd_g_stock_attr_hd_g_attr_value1_idx` (`attr_value_av_id`),
   KEY `fk_hd_g_stock_attr_hd_g_stock1_idx` (`stock_st_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='库存属性关联表' AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='库存属性关联表' AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `hd_g_stock_attr`
@@ -379,7 +448,13 @@ INSERT INTO `hd_g_stock_attr` (`sa_id`, `category_cid`, `goods_gid`, `attr_value
 (1, 11, 14, 113, 1),
 (2, 11, 14, 110, 1),
 (3, 11, 14, 112, 2),
-(4, 11, 14, 109, 2);
+(4, 11, 14, 109, 2),
+(5, 23, 3, 115, 3),
+(6, 23, 3, 111, 3),
+(7, 0, 3, 115, 4),
+(8, 0, 3, 111, 4),
+(9, 22, 2, 115, 5),
+(10, 22, 2, 111, 5);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

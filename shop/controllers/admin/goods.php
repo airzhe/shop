@@ -8,18 +8,23 @@ class Goods extends Admin_Controller{
 		parent::__construct();
 		$this->load->model('Goods_model');
 		$this->load->model('Goods_Attr_model');
+		$this->load->model('Goods_Pic_model');
 		$this->load->model('Category_model');
 		$this->load->model('Stock_model');
+		$this->load->model('Brand_model');
 		// $this->load->model('Brand_Category_model');
 	}
 	public function index(){
-		$this->view('goods_edit',$this->data);
+		$goods_list=$this->Goods_model->get();
+		// p($goods_list);
+		$this->data['goods_list']=$goods_list;
+		$this->view('goods',$this->data);
 	}
 	// 添加 更新
 	public function edit ($gid=NULL){
-	
+
 		if($this->input->post()){
-				// p($this->input->post());die;
+			// p($this->input->post());die;
 			$rules =$this->Goods_model->rules;
 			$this->form_validation->set_rules($rules);
 
@@ -32,18 +37,37 @@ class Goods extends Admin_Controller{
 					$this->Goods_Attr_model->save_data($_gid);
 					# 库存表和库存属性关联表
 					$this->Stock_model->save_data($_gid);
+					# 存储商品图片
+					$this->Goods_model->save_goods_pic($_gid);
 				}
-				success('操作成功',"admin/category/");
+				// success('操作成功',"admin/goods/");
 			}else{
 				echo validation_errors(); 
 			}
 		}else{
 			if($gid){
 				$goods=$this->Goods_model->get($gid);
+				// 取得分类
+				$cid=$goods['cid'];
+				$cate=$this->Category_model->get();
+				// p($cate);
+				$this->load->library('categoryd');
+				$_parents=$this->categoryd->getParents($cate,$cid);
+				$category='';
+				foreach ($_parents as $v) {
+					$category.=$v['cname'].' ';
+				}
+				$this->data['category']=$category;
+				$brand_list= $this->db->query("select * from {$this->db->dbprefix}brand where `bid` in (select `bid` from {$this->db->dbprefix}brand_category where `cid` ={$goods['cid']})")->result_array();
+				$goods_pic=$this->Goods_Pic_model->get_by(array('goods_gid'=>$gid));
+				$this->data['goods_pic']=$goods_pic;
 			}else{
 				$goods=$this->Goods_model->get_new();
+				$brand_list=array();
 			}
+			p($goods);
 			$this->data['category_list']=$this->Category_model->get_by(array('pid'=>0));
+			$this->data['brand_list']=$brand_list;
 			$this->data['goods']=$goods;
 			$this->view('goods_edit.php',$this->data);
 		}
@@ -155,5 +179,17 @@ class Goods extends Admin_Controller{
 		$html.='</table>';
 		return $html;
 	}
+	// 删除产品图片
+	public function del_goods_pic($path){
+		$path=$this->input->post('path');
+		$pic_id=$this->input->post('pic_id');
+		if($this->Goods_Pic_model->del($pic_id))
+		{
+			if(is_file($path)){
+				unlink($path);
+			}
+			die(json_encode(array('status'=>1)));
+		}
+	}	
 
 }

@@ -15,11 +15,12 @@ table.edit tbody label{vertical-align: middle;}
 .tab-pane table tr:first-child td{border-top:none;}
 .tab-pane table tr td:first-child{width: 100px;}
 
-.tab-content.category ul{padding:0;margin-top: 20px;}
-.tab-content.category ul li{
+#brand ul{padding:0;margin-top: 20px;}
+#brand ul li{
 	list-style:none;float:left;
 	padding:20px;
 	/*background: #ccc;*/
+
 	margin:10px;
 	border-radius:4px;
 	border:1px solid #ddd;
@@ -27,20 +28,26 @@ table.edit tbody label{vertical-align: middle;}
 	cursor:pointer;
 	background: url(../images/select.gif) no-repeat right 0;
 }
-.tab-content.category ul li:hover{
+.tab-content.goods li{
+	background-image:none;
+}
+#brand ul li img{
+	width: 90px;
+}
+#brand ul li:hover{
 	border-width: 2px;
 	border-color:#FDA316;
 	margin:9px;
 }
-.tab-content.category ul li.active{
+#brand ul li.active{
 	background-image: url(../images/selected.gif)
 }
 
-.tab-content.category li p{
+#brand  li p{
 	text-align: center;
 }
 
-.tab-content.category ul li img+span{display: block;text-align: center;margin-top:5px;}
+#brand  ul li img+span{display: block;text-align: center;margin-top:5px;}
 [type="checkbox"]{
 	vertical-align:-2px;
 }
@@ -54,7 +61,6 @@ table#category td:nth-of-type(2) s:before{display:block;content:"";position:abso
 	padding: 5px;
 	cursor: pointer;
 }
-
 
 table.edit tbody td.category select{
 	width:auto;
@@ -76,6 +82,18 @@ label{
 	border-bottom: none;
 	background-color: rgb(217, 237, 247);
 	margin-bottom: 0;
+}
+.category_text{
+	line-height: 30px;
+}
+/*产品页图片样式*/
+#pic ul{
+	border-bottom: 2px solid #dcdcdc;
+}
+#pic ul li{
+	list-style: none;
+	float: left;
+	padding:20px 20px;
 }
 /*系统设置*/
 table.settings tbody tr > td:first-child{text-align:right;width: 160px;vertical-align: middle;}

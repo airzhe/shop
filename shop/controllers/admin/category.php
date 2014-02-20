@@ -98,4 +98,13 @@ class Category extends Admin_Controller{
 			$this->view('category_edit.php',$this->data);
 		}
 	}
+	// 取得对应的品牌
+	public function get_brand($cid){
+		$brand= $this->db->query("select * from {$this->db->dbprefix}brand where `bid` in (select `bid` from {$this->db->dbprefix}brand_category where `cid` ={$cid})")->result_array();
+		if(empty($brand)){
+			die(json_encode(array('status'=>0)));
+		}else{
+			die(json_encode(array('status'=>1,'brand_list'=>$brand)));
+		}
+	}
 }
